@@ -1745,7 +1745,8 @@ function sfmodel_fit(sfdat::DataFrame) #, D1::Dict = _dicM, D2::Dict = _dicINI, 
        pretty_table(table_show[2:end,:],    # could print the whole table as is, but this prettier
                     header=["", "Var.", "Coef.", "Std.Err.", "z", "P>|z|", 
                             "95%CI_l", "95%CI_u"],
-                    formatters = ft_printf("%5.4f", 3:8),
+                    # formatters = ft_printf("%5.4f", 3:8),
+                    formatters = (v, i, j) -> (j in 3:8 && v isa Number) ? @sprintf("%5.4f", v) : v,
                     compact_printing = true,
                     backend = Val(sf_table))
        println()
@@ -1780,7 +1781,8 @@ function sfmodel_fit(sfdat::DataFrame) #, D1::Dict = _dicM, D2::Dict = _dicINI, 
            println("Convert the constant log-parameter to its original scale, e.g., σ² = exp(log_σ²):")   
            pretty_table(auxtable[1:rn,:],
                         header=["", "Coef.", "Std.Err."],
-                        formatters = ft_printf("%5.4f", 2:3),
+                        # formatters = ft_printf("%5.4f", 2:3),
+                        formatters = (v, i, j) -> (j in 2:3 && v isa Number) ? @sprintf("%5.4f", v) : v,
                         compact_printing = true,
                         backend = Val(sf_table))
 
