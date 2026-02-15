@@ -1742,14 +1742,12 @@ function sfmodel_fit(sfdat::DataFrame) #, D1::Dict = _dicM, D2::Dict = _dicINI, 
        print("Log-likelihood value: "); printstyled(round(-1*Optim.minimum(mfun); digits=5); color=:yellow); println()
        println()
    
-       pretty_table(table_show[2:end,:],    # could print the whole table as is, but this prettier
-                    header=["", "Var.", "Coef.", "Std.Err.", "z", "P>|z|", 
-                            "95%CI_l", "95%CI_u"],
-                    # formatters = ft_printf("%5.4f", 3:8),
-                    formatters = [(v, i, j) -> (j in 3:8 && v isa Number) ? @sprintf("%5.4f", v) : v],
-                    compact_printing = true,
-                    backend = sf_table)
-       println()
+       pretty_table(table_show[2:end,:],
+                  column_labels=["", "Var.", "Coef.", "Std.Err.", "z", "P>|z|", 
+                          "95%CI_l", "95%CI_u"],
+                  formatters = [(v, i, j) -> (j in 3:8 && v isa Number) ? @sprintf("%5.4f", v) : v],
+                  compact_printing = true)
+      println()
 
 
        # *----- Auxiliary Table, log parameters to original scales --------
@@ -1780,11 +1778,10 @@ function sfmodel_fit(sfdat::DataFrame) #, D1::Dict = _dicM, D2::Dict = _dicINI, 
        if rn >= 1  # table is non-empty
            println("Convert the constant log-parameter to its original scale, e.g., σ² = exp(log_σ²):")   
            pretty_table(auxtable[1:rn,:],
-                        header=["", "Coef.", "Std.Err."],
-                        # formatters = ft_printf("%5.4f", 2:3),
+                        column_labels=["", "Coef.", "Std.Err."],
                         formatters = [(v, i, j) -> (j in 2:3 && v isa Number) ? @sprintf("%5.4f", v) : v],
-                        compact_printing = true,
-                        backend = sf_table)
+                        compact_printing = true)
+
 
            print("\nTable format: "); printstyled("$(sf_table)"; color=:yellow); println(". Use sfmodel_opt() to choose between text, html, and latex.")
            println()
