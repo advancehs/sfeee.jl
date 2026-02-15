@@ -1748,7 +1748,7 @@ function sfmodel_fit(sfdat::DataFrame) #, D1::Dict = _dicM, D2::Dict = _dicINI, 
                     # formatters = ft_printf("%5.4f", 3:8),
                     formatters = (v, i, j) -> (j in 3:8 && v isa Number) ? @sprintf("%5.4f", v) : v,
                     compact_printing = true,
-                    backend = Val(sf_table))
+                    backend = sf_table)
        println()
 
 
@@ -1784,7 +1784,7 @@ function sfmodel_fit(sfdat::DataFrame) #, D1::Dict = _dicM, D2::Dict = _dicINI, 
                         # formatters = ft_printf("%5.4f", 2:3),
                         formatters = (v, i, j) -> (j in 2:3 && v isa Number) ? @sprintf("%5.4f", v) : v,
                         compact_printing = true,
-                        backend = Val(sf_table))
+                        backend = sf_table)
 
            print("\nTable format: "); printstyled("$(sf_table)"; color=:yellow); println(". Use sfmodel_opt() to choose between text, html, and latex.")
            println()
