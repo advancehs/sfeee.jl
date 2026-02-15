@@ -91,6 +91,7 @@ using LineSearches
 using Calculus 
 using BlockDiagonals            # for diagnol matrix
 using ADTypes
+using Printf
 
 #############################
 ##   Define Model Types    ##
