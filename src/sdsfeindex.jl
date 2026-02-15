@@ -55,10 +55,10 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0/σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-# @views jlms[ind] = ( hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(sigs2[ttt])) * 
-#         sqrt(sigs2[ttt]) / normcdf(mus[ttt]/sqrt(sigs2[ttt])) ))
+@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+# @views jlms[ind] = ( hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) * 
+#         sqrt(max(sigs2[ttt], 1e-20)) / normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) ))
 
 end # for ttt=1:T
 # end # begin
@@ -75,8 +75,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0/σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] =   (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =   (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wy)==1 
@@ -129,8 +129,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0/σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
  
 end # for ttt=1:T
 end # begin
@@ -146,8 +146,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0/σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
  
 
 end # for ttt=1:T
@@ -206,8 +206,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0/σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -223,8 +223,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0/σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 
 end # for ttt=1:T
@@ -280,8 +280,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -295,8 +295,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0 /(hitau[ind]'*invPi*hitau[ind]+ 1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 end # for ttt=1:T
 end # begin
@@ -357,8 +357,8 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0/σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -375,8 +375,8 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0/σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -430,8 +430,8 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -446,8 +446,8 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -504,8 +504,8 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -521,8 +521,8 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wv[ttt]*y[ind];
 @views sigs2 = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -568,8 +568,8 @@ jlms = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -684,7 +684,7 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -701,7 +701,7 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -765,7 +765,7 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -780,7 +780,7 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0 /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -848,7 +848,7 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -864,7 +864,7 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -928,7 +928,7 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -942,7 +942,7 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -1013,7 +1013,7 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wu)>1
@@ -1029,7 +1029,7 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wu)==1 
@@ -1097,7 +1097,7 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wu)>1
@@ -1111,7 +1111,7 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wu)==1 
@@ -1181,7 +1181,7 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wv)>1
@@ -1197,7 +1197,7 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wv)==1 
@@ -1257,7 +1257,7 @@ jlms = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 
@@ -1362,8 +1362,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] .= (hi[ind] .* ( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] .= (hi[ind] .* ( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -1381,8 +1381,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .* ( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .* ( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -1437,8 +1437,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -1454,8 +1454,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -1514,8 +1514,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -1531,8 +1531,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -1588,8 +1588,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -1603,8 +1603,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -1666,8 +1666,8 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -1684,8 +1684,8 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -1741,8 +1741,8 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -1757,8 +1757,8 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -1814,8 +1814,8 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -1831,8 +1831,8 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wv[ttt]*y[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -1879,8 +1879,8 @@ jlms = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -1996,8 +1996,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
   @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
   @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
   @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-  @views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+  @views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # begin
 end # for ttt=1:T
@@ -2014,8 +2014,8 @@ elseif length(Wy)>1
   @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
   @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
   @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-  @views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+  @views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -2080,8 +2080,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -2096,8 +2096,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -2166,8 +2166,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -2183,8 +2183,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -2248,8 +2248,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -2264,8 +2264,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -2336,7 +2336,7 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wu)>1
@@ -2352,7 +2352,7 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wu)==1 
@@ -2420,7 +2420,7 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wu)>1
@@ -2434,7 +2434,7 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wu)==1 
@@ -2504,7 +2504,7 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wv)>1
@@ -2520,7 +2520,7 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wv)==1 
@@ -2581,7 +2581,7 @@ jlms = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 
@@ -3479,8 +3479,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0/σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 
 end # for ttt=1:T
@@ -3498,8 +3498,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0/σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 
 end # for ttt=1:T
@@ -3552,8 +3552,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0/σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 end # for ttt=1:T
 end # begin
@@ -3569,8 +3569,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0/σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] =   (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =   (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 end # for ttt=1:T
 end # begin
@@ -3626,8 +3626,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0/σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] =   (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =   (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -3643,8 +3643,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0/σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 
 end # for ttt=1:T
@@ -3699,8 +3699,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -3714,8 +3714,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0 /(hi[ind]'*invPi*hi[ind]+ 1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
+@views jlms[ind] =  (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
 
 
 end # for ttt=1:T
@@ -3775,8 +3775,8 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0/σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -3793,8 +3793,8 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0/σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -3847,8 +3847,8 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -3863,8 +3863,8 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -3919,8 +3919,8 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -3936,8 +3936,8 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wv[ttt]*y[ind];
 @views sigs2 = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -3981,8 +3981,8 @@ jlms = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -4095,7 +4095,7 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -4112,7 +4112,7 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -4174,7 +4174,7 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -4189,7 +4189,7 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0 /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -4255,7 +4255,7 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -4271,7 +4271,7 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -4334,8 +4334,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views bc[ind] = Mgamma*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
-@views jlms[ind] = Mgamma*(hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(sigs2[ttt])) * sqrt(sigs2[ttt]) / normcdf(mus[ttt]/sqrt(sigs2[ttt])) ) )
+@views bc[ind] = Mgamma*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
+@views jlms[ind] = Mgamma*(hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) * sqrt(max(sigs2[ttt], 1e-20)) / normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) ) )
 
 end # for ttt=1:T
 end # begin
@@ -4349,7 +4349,7 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) );  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) );  
 
 end # for ttt=1:T
 end # begin
@@ -4418,7 +4418,7 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wu)>1
@@ -4434,7 +4434,7 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wu)==1 
@@ -4500,7 +4500,7 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wu)>1
@@ -4514,7 +4514,7 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wu)==1 
@@ -4582,7 +4582,7 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wv)>1
@@ -4598,7 +4598,7 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wv)==1 
@@ -4656,7 +4656,7 @@ jlms = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 return jlms 
@@ -4759,8 +4759,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -4777,8 +4777,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -4830,8 +4830,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -4847,8 +4847,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -4905,8 +4905,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -4922,8 +4922,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -4977,8 +4977,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -4992,8 +4992,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = Mgamma*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = Mgamma*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -5053,8 +5053,8 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -5071,8 +5071,8 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -5126,8 +5126,8 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -5142,8 +5142,8 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 
 end # for ttt=1:T
@@ -5197,8 +5197,8 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 # end # begin
@@ -5214,8 +5214,8 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wv[ttt]*y[ind];
 @views sigs2 = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -5259,8 +5259,8 @@ jlms = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -5374,8 +5374,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
   @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
   @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
   @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-  @views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+  @views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # begin
 end # for ttt=1:T
@@ -5392,8 +5392,8 @@ elseif length(Wy)>1
   @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
   @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
   @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-  @views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+  @views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -5456,8 +5456,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -5472,8 +5472,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 
 end # for ttt=1:T
@@ -5540,8 +5540,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -5557,8 +5557,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -5620,8 +5620,8 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = Mgamma*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = Mgamma*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -5636,8 +5636,8 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 
 end # for ttt=1:T
 end # begin
@@ -5706,7 +5706,7 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wu)>1
@@ -5722,7 +5722,7 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wu)==1 
@@ -5788,7 +5788,7 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wu)>1
@@ -5802,7 +5802,7 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wu)==1 
@@ -5870,7 +5870,7 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 elseif length(Wv)>1
@@ -5886,7 +5886,7 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 end  #    if length(Wv)==1 
@@ -5945,7 +5945,7 @@ jlms = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
+@views jlms[ind] = hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
 end # for ttt=1:T
 end # begin
 
@@ -6817,10 +6817,10 @@ function  jlmsbct_yuv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, 
     @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
     @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
     @views jlms_indirect = jlms - jlms_direct
     end # for ttt=1:T
     # end # begin
@@ -6838,10 +6838,10 @@ function  jlmsbct_yuv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, 
     @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
     @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
     @views jlms_indirect = jlms - jlms_direct
     
     
@@ -6901,10 +6901,10 @@ function  jlmsbct_yu(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
     @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
     @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
     @views jlms_indirect = jlms - jlms_direct 
     
     end # for ttt=1:T
@@ -6922,10 +6922,10 @@ function  jlmsbct_yu(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
     @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
     @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
     @views jlms_indirect = jlms - jlms_direct
     
     
@@ -6988,10 +6988,10 @@ function  jlmsbct_yv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
     @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
     @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
     @views jlms_indirect = jlms - jlms_direct
     
     end # for ttt=1:T
@@ -7009,10 +7009,10 @@ function  jlmsbct_yv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
     @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
     @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
     @views jlms_indirect = jlms - jlms_direct
     
     
@@ -7071,10 +7071,10 @@ function  jlmsbct_y(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v:
     @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
     @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
     @views jlms_indirect = jlms - jlms_direct 
     
     end # for ttt=1:T
@@ -7090,10 +7090,10 @@ function  jlmsbct_y(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v:
     @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
     @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+    @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
     @views jlms_indirect = jlms - jlms_direct
     
     
@@ -7158,10 +7158,10 @@ function  jlmsbct_uv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
    @views ϵ[ind] = ϵ[ind];
    @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
    @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-   @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-           normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-   @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-           normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+   @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+           normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+   @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+           normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
    @views jlms_indirect = jlms - jlms_direct
    
    end # for ttt=1:T
@@ -7179,10 +7179,10 @@ function  jlmsbct_uv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
    @views ϵ[ind] = ϵ[ind];
    @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
    @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-   @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-           normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-   @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-           normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+   @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+           normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+   @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+           normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
    @views jlms_indirect = jlms - jlms_direct
    
    end # for ttt=1:T
@@ -7240,10 +7240,10 @@ function  jlmsbct_u(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v:
     @views ϵ[ind] = ϵ[ind];
     @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-    @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+    @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
     @views jlms_indirect = jlms - jlms_direct
     
     end # for ttt=1:T
@@ -7259,10 +7259,10 @@ function  jlmsbct_u(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v:
     @views ϵ[ind] = ϵ[ind];
     @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-    @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+    @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
     @views jlms_indirect = jlms - jlms_direct
     
     
@@ -7322,10 +7322,10 @@ function  jlmsbct_v(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v:
     @views ϵ[ind] = ϵ[ind];
     @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-    @views jlms[ind] =1* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-    @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+    @views jlms[ind] =1* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+    @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
     @views jlms_indirect = jlms - jlms_direct
     
     end # for ttt=1:T
@@ -7342,10 +7342,10 @@ function  jlmsbct_v(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v:
     @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wv[ttt]*y[ind];
     @views sigs2 = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
     @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-    @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-    @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+    @views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+    @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
     @views jlms_indirect = jlms - jlms_direct
     
     
@@ -7396,10 +7396,10 @@ function  jlmsbct_(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v::
     @views ϵ[ind] = ϵ[ind];
     @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
     @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-    @views jlms[ind] =1* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-    @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-            normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+    @views jlms[ind] =1* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+    @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+            normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
     @views jlms_indirect = jlms - jlms_direct
     
     end # for ttt=1:T
@@ -7521,10 +7521,10 @@ function  jlmsbcdt_yuv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix,
    @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
    @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
    @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-   @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-      normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+   @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+      normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # begin
@@ -7543,10 +7543,10 @@ function  jlmsbcdt_yuv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix,
    @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
    @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
    @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-   @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-   normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-   normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+   @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+   normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+   normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -7614,10 +7614,10 @@ function  jlmsbcdt_yu(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, 
  @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta);
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  end # for ttt=1:T
  end # begin
@@ -7633,10 +7633,10 @@ function  jlmsbcdt_yu(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, 
  @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind]  - PorC*(eps[ind,:]*eta);
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -7707,10 +7707,10 @@ function  jlmsbcdt_yv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, 
  @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mgamma)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mgamma))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mgamma)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mgamma))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  end # for ttt=1:T
  end # begin
@@ -7727,10 +7727,10 @@ function  jlmsbcdt_yv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, 
  @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mgamma)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mgamma))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mgamma)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mgamma))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -7797,10 +7797,10 @@ function  jlmsbcdt_y(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
  @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta) ;
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -7817,10 +7817,10 @@ function  jlmsbcdt_y(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
  @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC*(eps[ind,:]*eta) ;
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -7892,10 +7892,10 @@ function  jlmsbcdt_uv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, 
  @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -7913,10 +7913,10 @@ function  jlmsbcdt_uv(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, 
  @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -7987,10 +7987,10 @@ function  jlmsbcdt_u(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
  @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -8006,10 +8006,10 @@ function  jlmsbcdt_u(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
  @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -8083,10 +8083,10 @@ function  jlmsbcdt_v(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
  @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -8104,10 +8104,10 @@ function  jlmsbcdt_v(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v
  @views ϵ[ind] = ϵ[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -8171,10 +8171,10 @@ function  jlmsbcdt_(y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, w::Matrix, v:
  @views ϵ[ind] = ϵ[ind]  - PorC*(eps[ind,:]*eta);
  @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
  @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
- @views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
- @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+ @views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+ @views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
  @views jlms_indirect = jlms - jlms_direct
  
  end # for ttt=1:T
@@ -8285,10 +8285,10 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 end # for ttt=1:T
 # end # begin
@@ -8306,10 +8306,10 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 
@@ -8368,10 +8368,10 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct 
 
 end # for ttt=1:T
@@ -8389,10 +8389,10 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 
@@ -8455,10 +8455,10 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -8476,10 +8476,10 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 
@@ -8539,10 +8539,10 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct 
 
 end # for ttt=1:T
@@ -8558,10 +8558,10 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 
@@ -8626,10 +8626,10 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -8647,10 +8647,10 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -8708,10 +8708,10 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -8727,10 +8727,10 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind];
 @views sigs2 = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2 ;
-@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
 @views jlms_indirect = jlms - jlms_direct
 
 
@@ -8789,10 +8789,10 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] =1* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+@views jlms[ind] =1* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -8809,10 +8809,10 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wv[ttt]*y[ind];
 @views sigs2 = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 @views mus = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2 ;
-@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+@views jlms[ind] =Mtau* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
 @views jlms_indirect = jlms - jlms_direct
 
 
@@ -8865,10 +8865,10 @@ jlms_indirect = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind];
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] =1* (hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   )) ;  
-@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-        normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ; 
+@views jlms[ind] =1* (hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   )) ;  
+@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+        normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ; 
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -8996,10 +8996,10 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
   @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
   @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
   @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-  @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-     normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+  @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+     normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # begin
@@ -9018,10 +9018,10 @@ elseif length(Wy)>1
   @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
   @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
   @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-  @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-  normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-  normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+  @views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+  normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+  normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9088,10 +9088,10 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 end # for ttt=1:T
 end # begin
@@ -9107,10 +9107,10 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9181,10 +9181,10 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 end # for ttt=1:T
 end # begin
@@ -9201,10 +9201,10 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9271,10 +9271,10 @@ if length(Wy)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9291,10 +9291,10 @@ elseif length(Wy)>1
 @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mgamma*Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mgamma*Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9367,10 +9367,10 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9388,10 +9388,10 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9462,10 +9462,10 @@ if length(Wu)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9481,10 +9481,10 @@ elseif length(Wu)>1
 @views ϵ[ind] = ϵ[ind] - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (Mtau)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(Mtau))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9557,10 +9557,10 @@ if length(Wv)==1  # 可以传入单个cell的w，则默认cell的长度为时间
 @views ϵ[ind] = ϵ[ind]- PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9578,10 +9578,10 @@ elseif length(Wv)>1
 @views ϵ[ind] = ϵ[ind] - PorC* Mrho*(eps[ind,:]*eta) ;
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9645,10 +9645,10 @@ jlms_indirect = zeros(eltype(y),size(hi,1),1);
 @views ϵ[ind] = ϵ[ind]  - PorC*(eps[ind,:]*eta);
 @views sigs2[ttt] = 1.0  /(hitau[ind]'*invPi*hitau[ind]+1.0 /σᵤ²);
 @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hitau[ind])*sigs2[ttt] ;
-@views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
-@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* 
-    normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))  ) ) ;  
+@views jlms[ind] = (1)*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
+@views jlms_direct[ind] = Diagonal(diag(1))*(hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* 
+    normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))  ) ) ;  
 @views jlms_indirect = jlms - jlms_direct
 
 end # for ttt=1:T
@@ -9761,8 +9761,8 @@ function jlmsbc(::Type{SSFOADH}, y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, 
 #             @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta) ;
 #             @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 #             @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-#             @views bc[ind] = Mgamma*hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
-#             @views jlms[ind] = Mgamma*hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(sigs2[ttt])) * sqrt(sigs2[ttt]) / normcdf(mus[ttt]/sqrt(sigs2[ttt])) )  
+#             @views bc[ind] = Mgamma*hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
+#             @views jlms[ind] = Mgamma*hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) * sqrt(max(sigs2[ttt], 1e-20)) / normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) )  
 #         end # for ttt=1:T
 #         end # begin
     
@@ -9778,8 +9778,8 @@ function jlmsbc(::Type{SSFOADH}, y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, 
 #             @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC*(eps[ind,:]*eta) ;
 #             @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 #             @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-#             @views bc[ind] = Mgamma*hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
-#             @views jlms[ind] = Mgamma*hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(sigs2[ttt])) * sqrt(sigs2[ttt]) / normcdf(mus[ttt]/sqrt(sigs2[ttt])) )  
+#             @views bc[ind] = Mgamma*hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
+#             @views jlms[ind] = Mgamma*hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) * sqrt(max(sigs2[ttt], 1e-20)) / normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) )  
 #         end # for ttt=1:T
 #         end # begin
 #     end  #    if length(Wy)==1 
@@ -9848,8 +9848,8 @@ function jlmsbc(::Type{SSFOADH}, y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, 
 #             @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[1]*y[ind]  - PorC*(eps[ind,:]*eta) ;
 #             @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 #             @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-#             @views bc[ind] = Mgamma*hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
-#             @views jlms[ind] = Mgamma*hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(sigs2[ttt])) * sqrt(sigs2[ttt]) / normcdf(mus[ttt]/sqrt(sigs2[ttt])) )  
+#             @views bc[ind] = Mgamma*hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
+#             @views jlms[ind] = Mgamma*hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) * sqrt(max(sigs2[ttt], 1e-20)) / normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) )  
 #         end # for ttt=1:T
 #         end # begin
     
@@ -9865,8 +9865,8 @@ function jlmsbc(::Type{SSFOADH}, y::Union{Vector,Matrix}, x::Matrix, Q::Matrix, 
 #             @views ϵ[ind] = ϵ[ind]-PorC*gamma*Wy[ttt]*y[ind] - PorC*(eps[ind,:]*eta) ;
 #             @views sigs2[ttt] = 1.0  /(hi[ind]'*invPi*hi[ind]+1.0 /σᵤ²);
 #             @views mus[ttt] = (μ/σᵤ² - ϵ[ind]'*invPi*hi[ind])*sigs2[ttt] ;
-#             @views bc[ind] = Mgamma*hi[ind] .*( mus[ttt] + sqrt(sigs2[ttt])* normpdf(mus[ttt]/sqrt(sigs2[ttt]))./normcdf(mus[ttt]/sqrt(sigs2[ttt]))   ) ;  
-#             @views jlms[ind] = Mgamma*hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(sigs2[ttt])) * sqrt(sigs2[ttt]) / normcdf(mus[ttt]/sqrt(sigs2[ttt])) )  
+#             @views bc[ind] = Mgamma*hi[ind] .*( mus[ttt] + sqrt(max(sigs2[ttt], 1e-20))* normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))./normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20)))   ) ;  
+#             @views jlms[ind] = Mgamma*hi[ind] .* ( mus[ttt] + normpdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) * sqrt(max(sigs2[ttt], 1e-20)) / normcdf(mus[ttt]/sqrt(max(sigs2[ttt], 1e-20))) )  
 #         end # for ttt=1:T
 #         end # begin
 #     end  #    if length(Wy)==1 
