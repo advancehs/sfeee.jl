@@ -1746,8 +1746,11 @@ function sfmodel_fit(sfdat::DataFrame) #, D1::Dict = _dicM, D2::Dict = _dicINI, 
                   column_labels=["", "Var.", "Coef.", "Std.Err.", "z", "P>|z|", 
                           "95%CI_l", "95%CI_u"],
                   formatters = [(v, i, j) -> (j in 3:8 && v isa Number) ? @sprintf("%5.4f", v) : v],
-                  compact_printing = false,crop = :none,columns_width = 0
-                  )
+                  compact_printing = true,
+                  maximum_number_of_rows = -1,
+                  maximum_number_of_columns = -1,
+                  fit_table_in_display_horizontally = false,
+                  fit_table_in_display_vertically = false)
       println()
 
 
@@ -1781,8 +1784,11 @@ function sfmodel_fit(sfdat::DataFrame) #, D1::Dict = _dicM, D2::Dict = _dicINI, 
            pretty_table(auxtable[1:rn,:],
                         column_labels=["", "Coef.", "Std.Err."],
                         formatters = [(v, i, j) -> (j in 2:3 && v isa Number) ? @sprintf("%5.4f", v) : v],
-                        compact_printing = false,crop = :none,columns_width = 0
-                        )
+                  compact_printing = true,
+                  maximum_number_of_rows = -1,
+                  maximum_number_of_columns = -1,
+                  fit_table_in_display_horizontally = false,
+                  fit_table_in_display_vertically = false)
 
 
            print("\nTable format: "); printstyled("$(sf_table)"; color=:yellow); println(". Use sfmodel_opt() to choose between text, html, and latex.")
