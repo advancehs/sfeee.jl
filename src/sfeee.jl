@@ -1,4 +1,4 @@
-module sdsfe
+module sfeee
 
 export sfmodel_spec, sfmodel_init, sfmodel_opt, counterfact,
        sfmodel_fit, sfmodel_predict, drawTrun,
